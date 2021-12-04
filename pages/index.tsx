@@ -3,7 +3,6 @@ import Head from "next/head";
 import { gql } from "@apollo/client";
 import client from "../apollo-client";
 import CharacterCard from "../components/CharacterCard";
-import { getStaticPaths } from "./characters/[id]";
 
 export default function Index({ people, loading, error }) {
 	return (
@@ -19,7 +18,7 @@ export default function Index({ people, loading, error }) {
 				{people
 					.map((p) => p.node)
 					.map((p) => {
-						return <CharacterCard character={p} key={p.id}/>;
+						return <CharacterCard character={p} key={p.id} />;
 					})}
 			</main>
 		</div>
@@ -52,5 +51,3 @@ export async function getStaticProps() {
 		},
 	};
 }
-
-getStaticPaths
