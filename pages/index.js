@@ -1,31 +1,11 @@
 import Head from "next/head";
-import ClientOnly from "../components/ClientOnly";
-import HomeComponent from "../components/Home";
 
 import { gql } from "@apollo/client";
 import client from "../apollo-client";
 import CharacterCard from "../components/CharacterCard";
-
-// export default function Home({}) {
-// 	return (
-// 		<div>
-// 			<Head>
-// 				<title>Star Wars</title>
-// 				<link rel="icon" href="/favicon.ico" />
-// 			</Head>
-
-// 			<main>
-// 				<ClientOnly>
-// 					<HomeComponent />
-// 				</ClientOnly>
-
-// 			</main>
-// 		</div>
-// 	);
-// }
+import { getStaticPaths } from "./characters/[id]";
 
 export default function Index({ people, loading, error }) {
-	console.info({ people });
 	return (
 		<div id="index">
 			<Head>
@@ -39,7 +19,6 @@ export default function Index({ people, loading, error }) {
 				{people
 					.map((p) => p.node)
 					.map((p) => {
-						// return <div key={p.id}>{p.name}</div>;
 						return <CharacterCard character={p} key={p.id}/>;
 					})}
 			</main>
@@ -73,3 +52,5 @@ export async function getStaticProps() {
 		},
 	};
 }
+
+getStaticPaths
