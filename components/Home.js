@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import { Button } from "@material-ui/core";
 
 const QUERY = gql`
 	query People {
@@ -15,7 +16,7 @@ const QUERY = gql`
 	}
 `;
 
-export default function People({}) {
+export default function Home({}) {
 	const { data, loading, error } = useQuery(QUERY);
 
 	if (loading) {
@@ -29,10 +30,11 @@ export default function People({}) {
 
 	const people = data.allPeople.edges.map((e) => e.node).slice(0, 30);
 
+
 	return (
-		<div className="list-people">
+		<div className="home-page">
 			<h1>People!</h1>
-      
+			<Button variant="contained">Hello World</Button>
 			<div>
 				<ul className="my-list">
 					{people.map((p) => {

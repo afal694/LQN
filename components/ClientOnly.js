@@ -11,3 +11,4 @@ export default function ClientOnly({ children, ...delegated }) {
 
 	return <div {...delegated}>{children}</div>;
 }
+
