@@ -22,15 +22,17 @@ const KeyValue = ({ name, value }) => {
 interface ModalProps {
 	open: boolean;
 	onClose: () => void;
-	person: FullCharacter;
+	person?: FullCharacter;
+	idPerson?: string;
 }
 
-export default function Modal({ open, onClose, person }: ModalProps) {
-	console.info({ person });
+export default function Modal({ open, onClose, person, idPerson }: ModalProps) {
+	console.info({ person, idPerson });
 	return (
 		<Dialog open={open}>
 			<DialogTitle>
-				{person.name}
+				{/* {person.name} */}
+				{!!idPerson ? idPerson : null}
 				<IconButton
 					aria-label="close"
 					onClick={onClose}
@@ -43,7 +45,7 @@ export default function Modal({ open, onClose, person }: ModalProps) {
 				</IconButton>
 			</DialogTitle>
 			<DialogContent>
-				<KeyValue name={"birthYear"} value={person.birthYear} />
+				{/* <KeyValue name={"birthYear"} value={person.birthYear} /> */}
 			</DialogContent>
 		</Dialog>
 	);

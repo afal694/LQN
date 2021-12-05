@@ -23,11 +23,16 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
 				<Typography>{name}</Typography>
 			</CardContent>
 			<CardActions>
-				<Link href={`/characters/[id]`} as={`/characters/${id}`}>
+				<Link href={`/?id=${id}`} as={`/characters/${id}`}>
 					<Button size="small" variant="contained" color="primary">
 						Learn More
 					</Button>
 				</Link>
+				{/* <Link href={`/characters/[id]`} as={`/characters/${id}`}>
+					<Button size="small" variant="contained" color="primary">
+						Learn More
+					</Button>
+				</Link> */}
 			</CardActions>
 		</Card>
 	);
