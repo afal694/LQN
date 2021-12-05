@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { FullCharacter, Person } from "utils/interfaces";
+import { gql, useQuery } from "@apollo/client";
 
 const KeyValue = ({ name, value }) => {
 	return (
@@ -26,13 +27,54 @@ interface ModalProps {
 	idPerson?: string;
 }
 
+const GET_CHARACTER = gql`
+	query character($peopleId: ID!) {
+		people(id: $peopleId) {
+			id
+			name
+			birthYear
+			created
+			eyeColor
+			height
+			mass
+			films {
+				edges {
+					node {
+						id
+						title
+						releaseDate
+						director {
+							name
+						}
+						planets {
+							edges {
+								node {
+									name
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+`;
+
 export default function Modal({ open, onClose, person, idPerson }: ModalProps) {
-	console.info({ person, idPerson });
+	const { data, loading, error } = useQuery(GET_CHARACTER, {
+		variables: { peopleId: idPerson },
+	});
+
+	if (!!error) return null;
+	if (!!loading) return <div>...loading</div>;
+
+	const { people } = data;
+
+	if (!people) return null;
 	return (
 		<Dialog open={open}>
 			<DialogTitle>
-				{/* {person.name} */}
-				{!!idPerson ? idPerson : null}
+				{people.name}
 				<IconButton
 					aria-label="close"
 					onClick={onClose}
