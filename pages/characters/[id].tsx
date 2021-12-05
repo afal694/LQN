@@ -2,19 +2,21 @@ import { gql } from "@apollo/client";
 import ListCards from "@components/ListCards";
 import Modal from "@components/Modal";
 import client from "apollo-client";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Character({ person }) {
-	const [openModal, setOpenModal] = useState(true);
+	const router = useRouter();
 
 	return (
 		<>
 			<Modal
-				open={openModal}
-				onClose={() => setOpenModal(false)}
+				open={true}
+				onClose={() => {
+					router.push("/");
+				}}
 				person={person}
 			/>
-			{/* <ListCards /> */}
 		</>
 	);
 }
