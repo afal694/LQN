@@ -1,12 +1,23 @@
 import { gql } from "@apollo/client";
+import ListCards from "@components/ListCards";
+import Modal from "@components/Modal";
 import client from "apollo-client";
+import { useState } from "react";
 
 export default function Character({ person }) {
-	console.info({ person });
+	const [openModal, setOpenModal] = useState(true);
 
-	return <div>Character </div>;
+	return (
+		<>
+			<Modal
+				open={openModal}
+				onClose={() => setOpenModal(false)}
+				person={person}
+			/>
+			{/* <ListCards /> */}
+		</>
+	);
 }
-
 
 export async function getStaticPaths() {
 	const { data } = await client.query({
@@ -35,7 +46,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-	const { data, loading, error } = await client.query({
+	const { data } = await client.query({
 		query: gql`
 			query character($peopleId: ID!) {
 				people(id: $peopleId) {
@@ -75,7 +86,7 @@ export async function getStaticProps({ params }) {
 
 	return {
 		props: {
-			person: data,
+			person: data.people,
 		},
 	};
 }
