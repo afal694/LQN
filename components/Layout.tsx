@@ -10,7 +10,6 @@ const Layout: React.FC = ({ children }) => {
 			</Head>
 
 			<header><h2>Star Wars</h2></header>
-			{/* <aside></aside> */}
 			<main>{children}</main>
 		</div>
 	);

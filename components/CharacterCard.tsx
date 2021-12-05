@@ -18,21 +18,16 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
 	const { name, id } = character;
 
 	return (
-		<Card elevation={5} className="character-card">
+		<Card variant="outlined" className="character-card">
 			<CardContent>
 				<Typography>{name}</Typography>
 			</CardContent>
 			<CardActions>
 				<Link href={`/?id=${id}`} as={`/characters/${id}`}>
-					<Button size="small" variant="contained" color="primary">
+					<Button size="small" variant="outlined" color="primary">
 						Learn More
 					</Button>
 				</Link>
-				{/* <Link href={`/characters/[id]`} as={`/characters/${id}`}>
-					<Button size="small" variant="contained" color="primary">
-						Learn More
-					</Button>
-				</Link> */}
 			</CardActions>
 		</Card>
 	);

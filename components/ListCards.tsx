@@ -7,9 +7,13 @@ interface ListCardsProps {
 }
 
 const ListCards: React.FC<ListCardsProps> = ({ people }: ListCardsProps) => {
-	return people.map((p: Person) => {
-		return <CharacterCard character={p} key={p.id} />;
-	});
+	return (
+		<div className="list-cards">
+			{people.map((p: Person) => {
+				return <CharacterCard character={p} key={p.id} />;
+			})}
+		</div>
+	);
 };
 
 export default ListCards;
