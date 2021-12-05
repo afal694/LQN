@@ -36,6 +36,8 @@ header {
 main {
 	grid-column: 1 / 3;
 	grid-row: 2/3;
+  overflow-x: hidden;
+	overflow-y: auto;
 }
 
 .list-cards {
@@ -44,9 +46,8 @@ main {
 	padding: 10px;
 	margin: 0 auto;
 	display: grid;
-	overflow-x: hidden;
-	overflow-y: auto;
-  
+
+
 	/* Extra small devices (phones, 600px and down) */
 	@media only screen and (max-width: 600px) {
 		grid-template-columns: repeat(1, 1fr);
