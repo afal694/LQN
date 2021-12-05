@@ -1,5 +1,7 @@
 import Head from "next/head";
+import Image from "next/image";
 import React from "react";
+import logo from "../logo.png"
 
 const Layout: React.FC = ({ children }) => {
 	return (
@@ -9,7 +11,9 @@ const Layout: React.FC = ({ children }) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<header><h2>Star Wars</h2></header>
+			<header>
+				<Image src={logo} width={100} height={45} />
+			</header>
 			<main>{children}</main>
 		</div>
 	);

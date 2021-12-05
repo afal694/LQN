@@ -14,7 +14,6 @@ interface CharacterCardProps {
 const CharacterCard: React.FC<CharacterCardProps> = ({
 	character,
 }: CharacterCardProps) => {
-	// console.info({ character });
 	const { name, id } = character;
 
 	return (
