@@ -4,8 +4,16 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
+import { Person } from "../utils/interfaces";
+import React from "react";
 
-const CharacterCard = ({ character }) => {
+interface CharacterCardProps {
+	character: Person;
+}
+
+const CharacterCard: React.FC<CharacterCardProps> = ({
+	character,
+}: CharacterCardProps) => {
 	console.info({ character });
 	const { name, id } = character;
 

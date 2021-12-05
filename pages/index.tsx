@@ -3,26 +3,14 @@ import Head from "next/head";
 import { gql } from "@apollo/client";
 import client from "../apollo-client";
 import CharacterCard from "../components/CharacterCard";
+import { Person } from "../utils/interfaces";
 
 export default function Index({ people, loading, error }) {
-	return (
-		<div id="index">
-			<Head>
-				<title>Star Wars</title>
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
-
-			<header>Header</header>
-			<aside></aside>
-			<main>
-				{people
-					.map((p) => p.node)
-					.map((p) => {
-						return <CharacterCard character={p} key={p.id} />;
-					})}
-			</main>
-		</div>
-	);
+	return people
+		.map((p) => p.node)
+		.map((p: Person) => {
+			return <CharacterCard character={p} key={p.id} />;
+		});
 }
 
 export async function getStaticProps() {
