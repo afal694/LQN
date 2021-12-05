@@ -32,15 +32,15 @@ header {
 	);
 	color: white;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 main {
 	grid-column: 1 / 3;
 	grid-row: 2/3;
-  overflow-x: hidden;
+	overflow-x: hidden;
 	overflow-y: auto;
 }
 
@@ -51,37 +51,38 @@ main {
 	margin: 0 auto;
 	display: grid;
 
-
+  grid-template-rows: auto;
 	/* Extra small devices (phones, 600px and down) */
 	@media only screen and (max-width: 600px) {
 		grid-template-columns: repeat(1, 1fr);
-		grid-template-rows: repeat(10, 105px);
 	}
 	/* Small devices (portrait tablets and large phones, 600px and up) */
 	@media only screen and (min-width: 600px) {
 		grid-template-columns: repeat(2, 1fr);
-		grid-template-rows: repeat(10, 105px);
 	}
 	/* Medium devices (landscape tablets, 768px and up) */
 	@media only screen and (min-width: 768px) {
 		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: repeat(10, 105px);
 	}
 	/* Large devices (laptops/desktops, 992px and up) */
 	@media only screen and (min-width: 992px) {
 		grid-template-columns: repeat(5, 1fr);
-		grid-template-rows: repeat(10, 105px);
 	}
 	/* Extra large devices (large laptops and desktops, 1200px and up) */
 	@media only screen and (min-width: 1200px) {
 		max-width: 1200px;
 		grid-template-columns: repeat(6, 1fr);
-		grid-template-rows: repeat(10, 105px);
 	}
 }
 
 .character-card {
 	grid-column: span 1;
+	.MuiCardContent-root {
+		padding: 8px 8px 4px 8px;
+	}
+	.MuiCardActions-root {
+		padding: 4px 8px 8px 8px;
+	}
 }
 
 .character-dialog {
