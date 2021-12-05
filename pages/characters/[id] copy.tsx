@@ -1,21 +1,19 @@
 import { gql } from "@apollo/client";
-
-import ListCards from "@components/ListCards";
 import Modal from "@components/Modal";
 import client from "apollo-client";
 import { useRouter } from "next/router";
 
-export default function Index({ people }) {
+export default function Character({ person }) {
 	const router = useRouter();
+
 	return (
 		<>
-			<ListCards people={people.map((p) => p.node)} />
 			<Modal
-				open={!!router.query.id}
+				open={true}
 				onClose={() => {
 					router.push("/");
 				}}
-				idPerson={String(router.query.id)}
+				person={person}
 			/>
 		</>
 	);
@@ -47,27 +45,48 @@ export async function getStaticPaths() {
 	return { paths, fallback: false };
 }
 
-export async function getStaticProps() {
-	const { data, loading, error } = await client.query({
+export async function getStaticProps({ params }) {
+	const { data } = await client.query({
 		query: gql`
-			query People {
-				allPeople {
-					edges {
-						node {
-							id
-							name
-							birthYear
-							gender
+			query character($peopleId: ID!) {
+				people(id: $peopleId) {
+					id
+					name
+					birthYear
+					created
+					eyeColor
+					height
+					mass
+					films {
+						edges {
+							node {
+								id
+								title
+								releaseDate
+								director {
+									name
+								}
+								planets {
+									edges {
+										node {
+											name
+										}
+									}
+								}
+							}
 						}
 					}
 				}
 			}
 		`,
+		variables: {
+			peopleId: params.id,
+		},
 	});
 
 	return {
 		props: {
-			people: data.allPeople.edges.slice(0, 60),
+			person: data.people,
 		},
 	};
 }
