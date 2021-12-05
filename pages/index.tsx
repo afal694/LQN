@@ -1,16 +1,9 @@
-import Head from "next/head";
-
 import { gql } from "@apollo/client";
 import client from "../apollo-client";
-import CharacterCard from "../components/CharacterCard";
-import { Person } from "../utils/interfaces";
+import ListCards from "@components/ListCards";
 
-export default function Index({ people, loading, error }) {
-	return people
-		.map((p) => p.node)
-		.map((p: Person) => {
-			return <CharacterCard character={p} key={p.id} />;
-		});
+export default function Index({ people }) {
+	return <ListCards people={people.map((p) => p.node)} />;
 }
 
 export async function getStaticProps() {
