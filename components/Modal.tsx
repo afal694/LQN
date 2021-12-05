@@ -5,12 +5,21 @@ import {
 	DialogActions,
 	DialogContent,
 	DialogTitle,
+	Icon,
 	IconButton,
+	Tooltip,
 	Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Film, FullCharacter, Person } from "utils/interfaces";
 import { gql, useQuery } from "@apollo/client";
+import {
+	AccountCircle,
+	Face,
+	LocalMovies,
+	Place,
+	Public,
+} from "@mui/icons-material";
 
 interface MovieProps {
 	movie: Film;
@@ -25,9 +34,30 @@ const Movie: React.FC<MovieProps> = ({
 		<div className="movie">
 			<Typography variant="subtitle1">{title}</Typography>
 			<div className="chips-container">
-				<Chip label={director.name} className="director" size="small"/>
+				<Chip
+					label={director.name}
+					className="director"
+					size="small"
+					variant="outlined"
+					icon={
+						<Tooltip title="Director">
+							<AccountCircle />
+						</Tooltip>
+					}
+				/>
 				{planets.edges.map(({ node: { name } }) => (
-					<Chip key={name} label={name} className="planet" size="small"/>
+					<Chip
+						key={name}
+						label={name}
+						className="planet"
+						size="small"
+						variant="outlined"
+						icon={
+							<Tooltip title="Planet">
+								<Public />
+							</Tooltip>
+						}
+					/>
 				))}
 			</div>
 		</div>
@@ -43,6 +73,9 @@ const Movies: React.FC<MoviesProps> = ({ person }) => {
 
 	return (
 		<div className="movies">
+			<div className="divider">
+				<span>Movies</span>
+			</div>
 			{!!person.films.edges &&
 				person.films.edges.map((n) => <Movie movie={n} key={n.node.id} />)}
 		</div>
@@ -57,7 +90,7 @@ interface ValueComponentProps {
 const ValueComponent: React.FC<ValueComponentProps> = ({ title, value }) => {
 	return (
 		<div className="value-component">
-			<span className="title">{`${title} : ${value}`}</span>
+			<span className="title">{`${title}: ${value}`}</span>
 		</div>
 	);
 };
@@ -70,8 +103,8 @@ const MetaCharacter: React.FC<MetaCharacterProps> = ({ person }) => {
 	return (
 		<div className="meta-character">
 			<ValueComponent title={"Birth Year"} value={person.birthYear} />
-			<ValueComponent title={"Mass"} value={person.mass} />
-			<ValueComponent title={"Height"} value={person.height} />
+			<ValueComponent title={"Mass"} value={`${person.mass} Kg`} />
+			<ValueComponent title={"Height"} value={`${person.height} m`} />
 			<ValueComponent title={"Eye color"} value={person.eyeColor} />
 		</div>
 	);

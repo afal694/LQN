@@ -52,11 +52,40 @@ main {
 }
 
 .character-dialog {
+	.meta-character {
+		margin: 0 13px 17px 13px;
+    display: flex;
+    flex-wrap: wrap;
+    .value-component{
+      flex: 50% 1;
+      width: 50%;
+    }
+	}
+  .value-component{
+    display: flex;
+    span{
+      margin: 0 auto;
+      font-family: sans-serif;
+    }
+  }
 	.movies {
+		.divider {
+			border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+			position: relative;
+			span {
+				position: absolute;
+				left: 27px;
+				bottom: -8px;
+				background-color: white;
+				padding: 0 5px;
+        font-family: sans-serif;
+			}
+			margin: 15px 0;
+		}
+    
 		.movie {
-      // outline: 1px solid $glossy-grape;
-      border-radius: 5px;
-
+			// outline: 1px solid $glossy-grape;
+			margin: 11px 0;
 			.chips-container {
 				display: flex;
 				flex-direction: row;
@@ -65,21 +94,27 @@ main {
 				.planet {
 					color: white;
 					margin: 3px;
-          flex: 0 1 auto;
+					flex: 0 1 auto;
+					.MuiChip-icon {
+						color: inherit;
+					}
 				}
 				.director {
-					background-color: $celtic-blue;
+					color: $celtic-blue;
+					border-color: $celtic-blue;
 				}
 
 				.planet {
-					background-color: $glossy-grape;
+					// background-color: $glossy-grape;
+          color: $glossy-grape;
+          border-color: $glossy-grape;
 				}
 			}
 
-      &:hover{
-      outline: 1px solid $celtic-blue;
-        
-      }
+			// &:hover{
+			// outline: 1px solid $celtic-blue;
+
+			// }
 		}
 	}
 }
