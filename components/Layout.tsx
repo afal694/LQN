@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import Head from "next/head";
 import React from "react";
 
@@ -9,8 +10,8 @@ const Layout: React.FC = ({ children }) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<header>Header</header>
-			<aside></aside>
+			<header><h2>Star Wars</h2></header>
+			{/* <aside></aside> */}
 			<main>{children}</main>
 		</div>
 	);

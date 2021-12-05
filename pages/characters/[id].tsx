@@ -1,6 +1,13 @@
 import { gql } from "@apollo/client";
 import client from "apollo-client";
 
+export default function Character({ person }) {
+	console.info({ person });
+
+	return <div>Character </div>;
+}
+
+
 export async function getStaticPaths() {
 	const { data } = await client.query({
 		query: gql`
@@ -20,7 +27,7 @@ export async function getStaticPaths() {
 	});
 
 	const paths = data.allPeople.edges
-		.slice(0, 45)
+		.slice(0, 60)
 		.map((p) => p.node)
 		.map(({ id }) => ({ params: { id } }));
 
@@ -71,10 +78,4 @@ export async function getStaticProps({ params }) {
 			person: data,
 		},
 	};
-}
-
-export default function Character({ person }) {
-	console.info({ person });
-
-	return <div>Character </div>;
 }
