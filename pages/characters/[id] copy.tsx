@@ -38,7 +38,6 @@ export async function getStaticPaths() {
 	});
 
 	const paths = data.allPeople.edges
-		.slice(0, 60)
 		.map((p) => p.node)
 		.map(({ id }) => ({ params: { id } }));
 

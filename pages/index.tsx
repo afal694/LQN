@@ -40,7 +40,7 @@ export async function getStaticProps() {
 
 	return {
 		props: {
-			people: data.allPeople.edges.slice(0, 60),
+			people: data.allPeople.edges,
 			// loading,
 			// error,
 		},
