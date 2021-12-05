@@ -1,0 +1,85 @@
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	height: 100%;
+}
+
+#index {
+	width: 100%;
+	height: 100%;
+
+	display: grid;
+	grid-template-columns: 1fr 9fr;
+	grid-template-rows: 1fr 13fr;
+}
+
+#__next {
+	width: 100%;
+	height: 100%;
+}
+
+header {
+	grid-column: 1 / 3;
+	grid-row: 1 / 2;
+	background: linear-gradient(
+		328deg,
+		rgba(0, 15, 94, 1) 0%,
+		rgba(0, 0, 0, 1) 100%
+	);
+	color: white;
+}
+
+main {
+	background-color: white;
+	grid-column: 1 / 3;
+	grid-row: 2/3;
+
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: repeat(10, 100px);
+	grid-gap: 10px;
+	padding: 10px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.character-card {
+	grid-column: span 1;
+}
+
+.character-dialog {
+	.movies {
+		.movie {
+      // outline: 1px solid $glossy-grape;
+      border-radius: 5px;
+
+			.chips-container {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				.director,
+				.planet {
+					color: white;
+					margin: 3px;
+          flex: 0 1 auto;
+				}
+				.director {
+					background-color: $celtic-blue;
+				}
+
+				.planet {
+					background-color: $glossy-grape;
+				}
+			}
+
+      &:hover{
+      outline: 1px solid $celtic-blue;
+        
+      }
+		}
+	}
+}

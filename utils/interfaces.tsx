@@ -12,23 +12,25 @@ export interface FullCharacter {
 	eyeColor: string;
 	height: string;
 	mass: string;
-	films: {
-		edges: {
-			node: {
-				id: string;
-				title: string;
-				releaseDate: string;
-				director: {
-					name: string;
-				};
-				planets: {
-					edges: {
-						node: {
-							name: string;
-						};
-					};
-				};
-			};
+	films: { edges: Film[] };
+}
+
+export interface Film {
+	node: {
+		id: string;
+		title: string;
+		releaseDate: string;
+		director: {
+			name: string;
 		};
+		planets: {
+			edges: Planet[];
+		};
+	};
+}
+
+export interface Planet {
+	node: {
+		name: string;
 	};
 }

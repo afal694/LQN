@@ -1,5 +1,6 @@
 import {
 	Button,
+	Chip,
 	Dialog,
 	DialogActions,
 	DialogContent,
@@ -8,15 +9,71 @@ import {
 	Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { FullCharacter, Person } from "utils/interfaces";
+import { Film, FullCharacter, Person } from "utils/interfaces";
 import { gql, useQuery } from "@apollo/client";
 
-const KeyValue = ({ name, value }) => {
+interface MovieProps {
+	movie: Film;
+}
+
+const Movie: React.FC<MovieProps> = ({
+	movie: {
+		node: { title, director, planets },
+	},
+}) => {
 	return (
-		<>
-			<Typography variant="body2">{`${name}: `}</Typography>
-			<Typography variant="body2">{value}</Typography>
-		</>
+		<div className="movie">
+			<Typography variant="subtitle1">{title}</Typography>
+			<div className="chips-container">
+				<Chip label={director.name} className="director" size="small"/>
+				{planets.edges.map(({ node: { name } }) => (
+					<Chip key={name} label={name} className="planet" size="small"/>
+				))}
+			</div>
+		</div>
+	);
+};
+
+interface MoviesProps {
+	person: FullCharacter;
+}
+
+const Movies: React.FC<MoviesProps> = ({ person }) => {
+	console.info({ person });
+
+	return (
+		<div className="movies">
+			{!!person.films.edges &&
+				person.films.edges.map((n) => <Movie movie={n} key={n.node.id} />)}
+		</div>
+	);
+};
+
+interface ValueComponentProps {
+	title: string;
+	value: string;
+}
+
+const ValueComponent: React.FC<ValueComponentProps> = ({ title, value }) => {
+	return (
+		<div className="value-component">
+			<span className="title">{`${title} : ${value}`}</span>
+		</div>
+	);
+};
+
+interface MetaCharacterProps {
+	person: FullCharacter;
+}
+
+const MetaCharacter: React.FC<MetaCharacterProps> = ({ person }) => {
+	return (
+		<div className="meta-character">
+			<ValueComponent title={"Birth Year"} value={person.birthYear} />
+			<ValueComponent title={"Mass"} value={person.mass} />
+			<ValueComponent title={"Height"} value={person.height} />
+			<ValueComponent title={"Eye color"} value={person.eyeColor} />
+		</div>
 	);
 };
 
@@ -25,6 +82,39 @@ interface ModalProps {
 	onClose: () => void;
 	person?: FullCharacter;
 	idPerson?: string;
+}
+
+export default function Modal({ open, onClose, person, idPerson }: ModalProps) {
+	const { data, loading, error } = useQuery(GET_CHARACTER, {
+		variables: { peopleId: idPerson },
+	});
+
+	if (!!error) return null;
+	if (!!loading) return <div>...loading</div>;
+
+	const { people } = data;
+	if (!people) return null;
+	return (
+		<Dialog open={open} className="character-dialog">
+			<DialogTitle>
+				{people.name}
+				<IconButton
+					aria-label="close"
+					onClick={onClose}
+					sx={{
+						position: "absolute",
+						right: 8,
+						top: 8,
+					}}>
+					<CloseIcon />
+				</IconButton>
+			</DialogTitle>
+			<DialogContent>
+				<MetaCharacter person={people} />
+				<Movies person={people} />
+			</DialogContent>
+		</Dialog>
+	);
 }
 
 const GET_CHARACTER = gql`
@@ -59,36 +149,3 @@ const GET_CHARACTER = gql`
 		}
 	}
 `;
-
-export default function Modal({ open, onClose, person, idPerson }: ModalProps) {
-	const { data, loading, error } = useQuery(GET_CHARACTER, {
-		variables: { peopleId: idPerson },
-	});
-
-	if (!!error) return null;
-	if (!!loading) return <div>...loading</div>;
-
-	const { people } = data;
-
-	if (!people) return null;
-	return (
-		<Dialog open={open}>
-			<DialogTitle>
-				{people.name}
-				<IconButton
-					aria-label="close"
-					onClick={onClose}
-					sx={{
-						position: "absolute",
-						right: 8,
-						top: 8,
-					}}>
-					<CloseIcon />
-				</IconButton>
-			</DialogTitle>
-			<DialogContent>
-				{/* <KeyValue name={"birthYear"} value={person.birthYear} /> */}
-			</DialogContent>
-		</Dialog>
-	);
-}
