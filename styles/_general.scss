@@ -40,17 +40,39 @@ main {
 
 .list-cards {
 	background-color: white;
-  max-width: 1200px;
-  margin: 0 auto;
-
-	display: grid;
-	grid-template-columns: repeat(6, 1fr);
-	grid-template-rows: repeat(10, 105px);
 	grid-gap: 10px;
 	padding: 10px;
+	margin: 0 auto;
+	display: grid;
 	overflow-x: hidden;
 	overflow-y: auto;
-
+  
+	/* Extra small devices (phones, 600px and down) */
+	@media only screen and (max-width: 600px) {
+		grid-template-columns: repeat(1, 1fr);
+		grid-template-rows: repeat(10, 105px);
+	}
+	/* Small devices (portrait tablets and large phones, 600px and up) */
+	@media only screen and (min-width: 600px) {
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(10, 105px);
+	}
+	/* Medium devices (landscape tablets, 768px and up) */
+	@media only screen and (min-width: 768px) {
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(10, 105px);
+	}
+	/* Large devices (laptops/desktops, 992px and up) */
+	@media only screen and (min-width: 992px) {
+		grid-template-columns: repeat(5, 1fr);
+		grid-template-rows: repeat(10, 105px);
+	}
+	/* Extra large devices (large laptops and desktops, 1200px and up) */
+	@media only screen and (min-width: 1200px) {
+		max-width: 1200px;
+		grid-template-columns: repeat(6, 1fr);
+		grid-template-rows: repeat(10, 105px);
+	}
 }
 
 .character-card {
