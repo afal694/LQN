@@ -24,7 +24,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
 			<CardActions>
 				<Link href={`/?id=${id}`} as={`/characters/${id}`}>
 					<Button size="small" variant="outlined" color="primary">
-						Info
+						See more
 					</Button>
 				</Link>
 			</CardActions>
