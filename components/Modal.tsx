@@ -103,8 +103,14 @@ const MetaCharacter: React.FC<MetaCharacterProps> = ({ person }) => {
 	return (
 		<div className="meta-character">
 			<ValueComponent title={"Birth Year"} value={person.birthYear} />
-			<ValueComponent title={"Mass"} value={`${person.mass} Kg`} />
-			<ValueComponent title={"Height"} value={`${person.height} m`} />
+			<ValueComponent
+				title={"Mass"}
+				value={`${person.mass} ${person.mass !== "unknown" ? "kg" : ""}`}
+			/>
+			<ValueComponent
+				title={"Height"}
+				value={`${person.height} ${person.height !== "unknown" ? "cm" : ""}`}
+			/>
 			<ValueComponent title={"Eye color"} value={person.eyeColor} />
 		</div>
 	);
